@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="bg-blue-300 min-h-screen">
+        <div class="container max-w-xl mx-auto pb-20">
+            <h1 class="pt-10 text-5xl font-semibold justify-center text-center">To Do List</h1>
+            <div class="p-8">
+                <div class="bg-white flex items-center rounded-full shadow-xl">
+                    <input 
+                        class="rounded-l-full w-full py-4 px-6 text-gray-700 leading-tight focus:outline-none" 
+                        type="text" 
+                        placeholder="Add things to do"
+                    />
+                    <div class="p-4">
+                        <button 
+                            class="bg-blue-500 text-white rounded-full p-2 hover:bg-blue-400 focus:outline-none w-12 h-12 flex items-center justify-center"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="w-full bg-white rounded-xl shadow-2xl">
+                <div class="grid grid-cols-12 border-b-4 align-item-center">
+                    <div class="col-span-10">
+                        <p class="text-md p-5">Cuci piring</p>
+                    </div>
+                    <div class="col-span-2 p-3">
+                        <button 
+                            class="bg-green-100 text-white rounded-full p-2 hover:bg-green-500 focus:outline-none h-10 w-10 flex items-center justify-item mx-auto"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="py-5">
+                    <button 
+                        class="bg-red-400 text-white rounded-full p-2 hover:bg-red-500 focus:outline-none w-1/4 flex items-center justify-center mx-auto"
+                    >
+                        <p class="mr-2">Clear All </p>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+  </body>
+</html>
