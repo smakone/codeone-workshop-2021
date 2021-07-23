@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="./App.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="App">
+      <h1 id="counterNumber">0</h1>
+      <button
+        class="button-clear"
+        id="counterUpButton"
+        onclick="clearCounter()"
+      >
+        Clear
+      </button>
+      <button
+        class="button-increase"
+        id="counterDownButton"
+        onclick="increaseCounter()"
+      >
+        +
+      </button>
+    </div>
+  </body>
+  <!-- Script Solution -->
+  <script>
+    // First we declare a pointer to the pointer display's HTML node
+    const counterNode = document.getElementById("counterNumber");
+    // This function increases the counter
+    const increaseCounter = () => {
+      // We modify the inner HTML of the counter node with its current value + 1
+      return (counterNode.innerHTML = parseInt(counterNode.innerHTML) + 1);
+    };
+
+    // This function clears the counter
+    const clearCounter = () => {
+      // We modify the inner HTML of the counter node with 0
+      return (counterNode.innerHTML = 0);
+    };
+  </script>
+  <!-- Script Solution Ends -->
+</html>

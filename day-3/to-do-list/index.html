@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <!-- ... -->
+    <title>TODO App!</title>
+  </head>
+  <body>
+    <div class="bg-blue-300 min-h-screen">
+      <div class="container max-w-xl mx-auto pb-20">
+        <h1 class="pt-10 text-5xl font-semibold justify-center text-center">
+          To Do List
+        </h1>
+
+        <!-- Add Things To Do -->
+        <div class="p-8">
+          <div class="bg-white flex items-center rounded-full shadow-xl">
+            <input
+              class="
+                rounded-l-full
+                w-full
+                py-4
+                px-6
+                text-gray-700
+                leading-tight
+                focus:outline-none
+              "
+              type="text"
+              placeholder="Add things to do"
+              id="todoInput"
+            />
+            <div class="p-4">
+              <button
+                class="
+                  bg-blue-500
+                  text-white
+                  rounded-full
+                  p-2
+                  hover:bg-blue-400
+                  focus:outline-none
+                  w-12
+                  h-12
+                  flex
+                  items-center
+                  justify-center
+                "
+                onclick="addTodo()"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 4v16m8-8H4"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item -->
+        <div class="w-full bg-white rounded-xl shadow-2xl">
+          <div id="todosContainer">
+            <!-- Todo Item  Starts -->
+            <!-- Todo Item Ends -->
+          </div>
+
+          <div class="py-5">
+            <button
+              class="
+                bg-red-400
+                text-white
+                rounded-full
+                p-2
+                hover:bg-red-500
+                focus:outline-none
+                w-1/4
+                flex
+                items-center
+                justify-center
+                mx-auto
+              "
+              onclick="clearTodos()"
+            >
+              <p class="mr-2">Clear All</p>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+
+  <!-- Script Solution Starts -->
+  <script>
+    //   Declare global variables to keep track of our todos
+    // -----
+    // TODOS is an array that contains all of our todo items. Think of this as our Database.
+    let TODOS = [];
+    // COUNT is a global variable that keeps track of how many todos we've made
+    let COUNT = 0;
+
+    // generateTodoCard is a function to create a new todo item
+    const generateTodoCard = (text) => {
+      // set the id of the new todo equals to the current COUNT + 1 (to avoid collision)
+      const newId = COUNT + 1;
+      //  We increase the global COUNT as well
+      COUNT += 1;
+      //   We create a new todo object, the reason we use a Json object to keep
+      //   track of the todo is that we have to keep track of the text and id to
+      //   make deleting and rendering more optimal
+      const todoItemObject = {
+        id: newId,
+        text: text,
+      };
+      //   We push the new object to the TODOS variable.
+      return TODOS.push(todoItemObject);
+    };
+
+    // addTodo is a function that gets called everytime we click the plus button
+    const addTodo = () => {
+      //   1. Get the todo text from the input
+      const todoText = document.getElementById("todoInput").value;
+      //   2. Generate a new todo card
+      generateTodoCard(todoText);
+      //   Render the new TOOD Card to the browser
+      renderTodos();
+      //   4. Clear the input
+      document.getElementById("todoInput").value = "";
+    };
+
+    // renderTodos is a function to render the item inside of TODOS into our browser
+    const renderTodos = () => {
+      // 1. Get the container of the todos (the node we'll append our item to)
+      const todoContainer = document.getElementById("todosContainer");
+      //   2. Set the container content as empty, we do this to avoid collision case
+      todoContainer.innerHTML = "";
+      //   3. Use a map arrow function to iterate over all of our TODOS object
+      TODOS.map((todo) => {
+        //   4. Create a new todo card with variables inserted
+        const newTodo = `
+        <div
+            class="grid grid-cols-12 border-b-4 align-item-center"
+            id="todoItem"
+          >
+            <div class="col-span-10">
+              <p class="text-md p-5" key="${todo.id}">${todo.text}</p>
+            </div>
+            <div class="col-span-2 p-3">
+              <button
+                class="
+                  bg-green-100
+                  text-white
+                  rounded-full
+                  p-2
+                  hover:bg-green-500
+                  focus:outline-none
+                  h-10
+                  w-10
+                  flex
+                  items-center
+                  justify-item
+                  mx-auto
+                "
+                onclick="markTodo(${todo.id})"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>`;
+        //   5. Append the new todo card into the container
+        return (todoContainer.innerHTML += newTodo);
+      });
+    };
+
+    // markTodo is a function to remove a todo from our TODOS database with a specified id
+    const markTodo = (id) => {
+      // filter the TODOS that have DIFFERENT id (instead of the marked one)
+      let newTODOS = TODOS.filter((todo) => todo.id !== id);
+      //   set the TODOS as the newly filtered one
+      TODOS = newTODOS;
+      //   re-render the TODOS database into our browser.
+      return renderTodos();
+    };
+
+    // clearTodos is a function to empty our database and counter variable
+    const clearTodos = () => {
+      // Set both the TODOS and COUNT to empty and 0
+      TODOS = [];
+      COUNT = 0;
+      //   Re-render the database into our browser
+      renderTodos();
+    };
+  </script>
+  <!-- Script Solution Ends -->
+</html>
